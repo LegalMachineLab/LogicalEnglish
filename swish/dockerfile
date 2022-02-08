@@ -7,16 +7,16 @@
 #   docker run -d --restart always -p 8082:3050 -v /home/ubuntu/TaxKB_swish_data:/data -v /home/ubuntu/TaxKB:/TaxKB -e LOAD='/TaxKB/swish/user_module_for_swish.pl' -e SPACY_HOST=demo.logicalcontracts.com:8080 -e LOAD_KB=true -e SUDO=true logicalcontracts/patchedswish
 #       make sure TaxKB_swish_data has permissions for group id 1024, e.g. something like:
 #       sudo chown -R :1024 TaxKB_swish_data ; sudo chmod -R 775 TaxKB_swish_data ; sudo chmod -R g+s TaxKB_swish_data
-FROM logicalcontracts/swish-june2020
+FROM swipl/swish
 LABEL maintainer = "mc@interprolog.com"
 ENV SWISH_DIR /swish
 ENV SWISH_DATA /data
 
 
 ENV MY_USER swishpersona
-RUN addgroup --gid 1024 mygroup
-RUN useradd -m -g mygroup -s /bin/bash $MY_USER
+RUN addgroup --gid 1024 swishpersona; useradd -m -g $MY_USER -s /bin/bash $MY_USER; rm /entry.sh
 COPY --chown=swishpersona ./patches/prolog_server.js ${SWISH_DIR}/web/js/codemirror/mode/prolog/
+COPY entry.sh /entry.sh
 
 # Now open to the public
 # RUN mkdir -p ${SWISH_DIR}/config-enabled && \
@@ -24,4 +24,5 @@ COPY --chown=swishpersona ./patches/prolog_server.js ${SWISH_DIR}/web/js/codemir
 
 # Swish likes to check existence of a /data directory:
 WORKDIR ${SWISH_DATA}
-ENTRYPOINT /usr/bin/swipl ${LOAD} ${SWISH_DIR}/daemon.pl --no-fork --port=3050 --user=$MY_USER --workers=16
+ENTRYPOINT ["/entry.sh"]
+# ENTRYPOINT /usr/bin/swipl ${LOAD} ${SWISH_DIR}/daemon.pl --no-fork --port=3050 --user=$MY_USER --workers=16

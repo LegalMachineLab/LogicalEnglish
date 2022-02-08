@@ -6,7 +6,7 @@
 # SWISH is in /home/swish; otherwise this is unchanged from https://github.com/SWI-Prolog/docker-swish
 
 configdir=config-enabled
-configavail=/home/swish/config-available
+configavail=/swish/config-available
 start=--no-fork
 ssl=
 scheme=http
@@ -154,6 +154,7 @@ else
   add_config notifications.pl
   add_config email.pl
   add_config clpqr.pl
+  add_config scasp.pl
 fi
 
 if [ -t 0 ] ; then
@@ -220,4 +221,6 @@ if [ -S /rserve/socket ]; then
   echo ":- set_setting_default(rserve:socket, '/rserve/socket')." >> $configdir/r_serve.pl
 fi
 
-${SWISH_HOME}/daemon.pl --${scheme}=3050 ${ssl} --user=$udaemon $start
+# /usr/bin/swipl /app/swish/user_module_for_swish.pl ${SWISH_HOME}/daemon.pl --${scheme}=3050 ${ssl} --user=$udaemon $start
+
+/usr/bin/swipl /app/swish/user_module_for_swish.pl ${SWISH_DIR}/daemon.pl --no-fork --port=3050 --user=swishpersona --workers=16
