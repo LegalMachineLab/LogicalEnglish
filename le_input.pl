@@ -778,11 +778,7 @@ or_ --> [o].  % italian and spanish
 or_ --> [ou]. % french
 
 not_ --> [it], spaces(_), [is], spaces(_), [not], spaces(_), [the], spaces(_), [case], spaces(_), [that], spaces(_). 
-<<<<<<< HEAD
-not_ --> [non], spaces(_), [è], spaces(_), [provato], spaces(_), [che], spaces(_). % italian
-=======
 not_ --> [non], spaces(_), [si], spaces(_), [dà], spaces(_), [il], spaces(_), [caso], spaces(_), [che], spaces(_). % italian
->>>>>>> 0ca7076 (Add italian builtin predicates)
 not_ --> [ce], spaces(_), [n],[A],[est], spaces(_), [pas], spaces(_), [le], spaces(_), [cas], spaces(_), [que], spaces(_), {atom_string(A, "'")}. % french
 not_ --> [no], spaces(_), [es], spaces(_), [el], spaces(_), [caso], spaces(_), [que], spaces(_).  % spanish
 
@@ -1809,20 +1805,13 @@ ind_det_C --> ['Quale']. % italian which
 % ind_det_C('Some').
 ind_det_C --> ['Each'].   % added experimental
 ind_det_C --> ['Which'].  % added experimentally
-<<<<<<< HEAD
 ind_det_C --> ['Cuál'].   % added experimentally spanish
-=======
->>>>>>> 0ca7076 (Add italian builtin predicates)
 
 def_det_C --> ['The'].
 def_det_C --> ['El'].  % spanish
 def_det_C --> ['La'].  % spanish, italian, and french
 def_det_C --> ['Le'].  % french
-<<<<<<< HEAD
-def_det_C --> ['L'], [A], {atom_string(A, "'")}.   % french
-=======
 def_det_C --> ['L'], [A], {atom_string(A, "'")}.   % french, italian
->>>>>>> 0ca7076 (Add italian builtin predicates)
 def_det_C --> ['Il'].  % italian
 def_det_C --> ['Lo'].  % italian
 
@@ -1840,10 +1829,7 @@ ind_det --> [quelle].  % french which? femenine
 ind_det --> [che]. % italian which
 ind_det --> [quale]. % italian which
 ind_det --> [uno].     % italian
-<<<<<<< HEAD
 ind_det --> ['cuál'].    % spanish
-=======
->>>>>>> 0ca7076 (Add italian builtin predicates)
 % ind_det(some).
 
 def_det --> [the].
