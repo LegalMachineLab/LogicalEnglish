@@ -448,7 +448,11 @@ rules_previous(KBName) -->
     {name_as_atom(NameWords, KBName)}.
 % french: la base de connaissances dont le nom est <nom> comprend :
 rules_previous(KBName) --> 
-    spaces_or_newlines(_), [la], spaces(_), [base], spaces(_), [de], spaces(_), [connaissances], spaces(_), [dont], spaces(_), [le], spaces(_), [nom], spaces(_), [est], extract_constant([comprend], NameWords), [comprend], spaces(_), [':'], !, spaces_or_newlines(_),
+    spaces_or_newlines(_), [la], spaces(_), [base], spaces(_), [de], spaces(_), [connaissances], spaces(_), [dont], spaces(_), [le], spaces(_), [nom], spaces(_), [est], extract_constant([comprend], NameWords), [], spaces(_), [':'], !, spaces_or_newlines(_),
+    {name_as_atom(NameWords, KBName)}.
+% italian: la base di conoscenza <nome> include
+rules_previous(KBName) --> 
+    spaces_or_newlines(_), [la], spaces(_), [base], spaces(_), [di], spaces(_), [conoscenza], spaces(_), extract_constant([include], NameWords), [include], spaces(_), [':'], !, spaces_or_newlines(_),
     {name_as_atom(NameWords, KBName)}.
 % spanish: la base de conocimiento <nombre> incluye: 
 rules_previous(KBName) --> 
@@ -2473,6 +2477,7 @@ query_or_empty --> query_.
 query_or_empty --> []. 
 
 with_ --> [with], spaces(_).
+with_ --> [con], spaces(_). % italian
 
 scenario_name_(Scenario) -->  scenario_or_empty_, extract_constant([], ScenarioWords), spaces(_), 
 {name_as_atom(ScenarioWords, Scenario)}. % Scenario by name
