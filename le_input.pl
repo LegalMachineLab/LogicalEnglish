@@ -778,7 +778,11 @@ or_ --> [o].  % italian and spanish
 or_ --> [ou]. % french
 
 not_ --> [it], spaces(_), [is], spaces(_), [not], spaces(_), [the], spaces(_), [case], spaces(_), [that], spaces(_). 
+<<<<<<< HEAD
 not_ --> [non], spaces(_), [è], spaces(_), [provato], spaces(_), [che], spaces(_). % italian
+=======
+not_ --> [non], spaces(_), [si], spaces(_), [dà], spaces(_), [il], spaces(_), [caso], spaces(_), [che], spaces(_). % italian
+>>>>>>> 0ca7076 (Add italian builtin predicates)
 not_ --> [ce], spaces(_), [n],[A],[est], spaces(_), [pas], spaces(_), [le], spaces(_), [cas], spaces(_), [que], spaces(_), {atom_string(A, "'")}. % french
 not_ --> [no], spaces(_), [es], spaces(_), [el], spaces(_), [caso], spaces(_), [que], spaces(_).  % spanish
 
@@ -1805,13 +1809,20 @@ ind_det_C --> ['Quale']. % italian which
 % ind_det_C('Some').
 ind_det_C --> ['Each'].   % added experimental
 ind_det_C --> ['Which'].  % added experimentally
+<<<<<<< HEAD
 ind_det_C --> ['Cuál'].   % added experimentally spanish
+=======
+>>>>>>> 0ca7076 (Add italian builtin predicates)
 
 def_det_C --> ['The'].
 def_det_C --> ['El'].  % spanish
 def_det_C --> ['La'].  % spanish, italian, and french
 def_det_C --> ['Le'].  % french
+<<<<<<< HEAD
 def_det_C --> ['L'], [A], {atom_string(A, "'")}.   % french
+=======
+def_det_C --> ['L'], [A], {atom_string(A, "'")}.   % french, italian
+>>>>>>> 0ca7076 (Add italian builtin predicates)
 def_det_C --> ['Il'].  % italian
 def_det_C --> ['Lo'].  % italian
 
@@ -1829,7 +1840,10 @@ ind_det --> [quelle].  % french which? femenine
 ind_det --> [che]. % italian which
 ind_det --> [quale]. % italian which
 ind_det --> [uno].     % italian
+<<<<<<< HEAD
 ind_det --> ['cuál'].    % spanish
+=======
+>>>>>>> 0ca7076 (Add italian builtin predicates)
 % ind_det(some).
 
 def_det --> [the].
@@ -2082,7 +2096,39 @@ predef_dict([<, T1, T2], [thing_1-thing, thing_2-thing], [T1, <, T2]).
 predef_dict([>, T1, T2], [thing_1-thing, thing_2-thing], [T1, >, T2]).
 predef_dict([unparse_time, Secs, Date], [secs-time, date-date], [Secs, corresponds, to, date, Date]).
 predef_dict([must_be, Type, Term], [type-type, term-term], [Term, must, be, Type]).
-predef_dict([must_not_be, A, B], [term-term, variable-variable], [A, must, not, be, B]). 
+predef_dict([must_not_be, A, B], [term-term, variable-variable], [A, must, not, be, B]).
+
+% Predefined italian predicates
+
+% Useful for the residence definition?
+% predef_dict([days_spent_in_uk,Individual,Start,End,TotalDays], [who-person,start-date,end-date,total-number], 
+%                    [Individual, spent, TotalDays, in, the, 'UK', starting, at, Start, &, ending, at, End]). 
+
+% Prolog
+predef_dict([has_as_head_before, A, B, C], [list-list, symbol-term, rest_of_list-list], [A, ha, B, come, testa, prima, di, C]).
+predef_dict([append, A, B, C],[first_list-list, second_list-list, third_list-list], [unendo, A, e, B, si, ottiene, C]).
+predef_dict([reverse, A, B], [list-list, other_list-list], [A, è, il, contrario, di, B]).
+predef_dict([same_date, T1, T2], [time_1-time, time_2-time], [T1, è, la, stessa, data, di, T2]). % see reasoner.pl before/2
+predef_dict([between,Minimum,Maximum,Middle], [min-date, max-date, middle-date], 
+            [Middle, è, compreso, tra, Minimum, &, Maximum]).
+predef_dict([is_1_day_after, A, B], [date-date, second_date-date],
+            [A, è, '1', giorno, dopo, B]).
+predef_dict([is_days_after, A, B, C], [date-date, number-number, second_date-date],
+            [A, è, B, giorni, dopo, C]).
+predef_dict([immediately_before, T1, T2], [time_1-time, time_2-time], [T1, è, immediatamente, prima, di, T2]). % see reasoner.pl before/2
+predef_dict([\=, T1, T2], [thing_1-thing, thing_2-thing], [T1, è, diverso, da, T2]).
+predef_dict([==, T1, T2], [thing_1-thing, thing_2-thing], [T1, è, uguale, a, T2]).
+predef_dict([is_a, Object, Type], [object-object, type-type], [Object, è, di, tipo, Type]).
+predef_dict([is_not_before, T1, T2], [time1-time, time2-time], [T1, non, è, prima, di, T2]). % see reasoner.pl before/2
+predef_dict([=, T1, T2], [thing_1-thing, thing_2-thing], [T1, è, uguale, a, T2]).
+predef_dict([isbefore, T1, T2], [time1-time, time2-time], [T1, è, prima, di, T2]). % see reasoner.pl before/2
+predef_dict([isafter, T1, T2], [time1-time, time2-time], [T1, è, dopo, T2]).  % see reasoner.pl before/2
+predef_dict([member, Member, List], [member-object, list-list], [Member, è, in, List]).
+predef_dict([is, A, B], [term-term, expression-expression], [A, è, B]). % builtin Prolog assignment
+
+predef_dict([unparse_time, Secs, Date], [secs-time, date-date], [Secs, corrispondono, alla, data, Date]).
+predef_dict([must_be, Type, Term], [type-type, term-term], [Term, deve, essere, Type]).
+predef_dict([must_not_be, A, B], [term-term, variable-variable], [A, non, può, essere, B]). 
 
 % pre_is_type/1
 pre_is_type(thing).
