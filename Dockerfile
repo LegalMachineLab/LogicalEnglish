@@ -30,16 +30,16 @@ COPY entry.sh entry.sh
 LABEL maintainer = "galileo.sartor@gmail.com"
 ENV SWISH_DIR /swish
 ENV SWISH_DATA /data
-# ENV LOAD /app/swish/user_module_for_swish.pl
-# ENV LOAD_KB true
+ENV LOAD /app/swish/user_module_for_swish.pl
+ENV LOAD_KB true
 
 ENV MY_USER swishpersona
 RUN addgroup --gid 1024 swishpersona; useradd -m -g $MY_USER -s /bin/bash $MY_USER; rm /entry.sh
-# COPY . /app/
+COPY . /app/
 COPY --chown=swishpersona swish/patches/prolog_server.js ${SWISH_DIR}/web/js/codemirror/mode/prolog/
 
 RUN mkdir -p ${SWISH_DIR}/config-enabled 
-# COPY ./network.pl ${SWISH_DIR}/config-available/
+COPY ./network.pl ${SWISH_DIR}/config-available/
 COPY ./entry.sh /entry.sh
 
 # Override with local sCASP
