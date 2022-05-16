@@ -43,8 +43,7 @@ RUN mkdir -p ${SWISH_DIR}/config-enabled
 COPY ./entry.sh /entry.sh
 
 # Override with local sCASP
-RUN rm -rf /swish/pack/sCASP/prolog/scasp/html.pl
-COPY html.pl ${SWISH_DIR}/pack/sCASP/prolog/scasp/html.pl
+COPY it.pl ${SWISH_DIR}/pack/sCASP/prolog/scasp/lang/it.pl
 
 # Swish likes to check existence of a /data directory:
 WORKDIR ${SWISH_DATA}
