@@ -68,10 +68,10 @@ and the property is of type immovable property in the state S
 and convention applies to the state R and the state S.
 
 % Art 7
-a p of an enterprise is taxable in a state R under Article7_1
+a profit of an enterprise is taxable in a state R under Article7_1
 if the enterprise is resident in the state R
-and the enterprise receives the p for a business
-and the p is of type businesss profit
+and the enterprise receives the profit for a business
+and the profit is of type businesss profit
 and convention applies to the state R and a state S
 and it is not the case that
     exception to Article7_1 applies to the enterprise for the p.
@@ -128,20 +128,20 @@ and the ship operates in an other state S
 and the ship operates in an other state C
 and the other state S is different from the other state C.
     
-a p A of a permanent establishment is taxable in a state S under Article7_2
+a profit A of a permanent establishment is taxable in a state S under Article7_2
 if an enterprise A is resident in a state R
 and the enterprise A has the permanent establishment in the state S
-and the permanent establishment receives the p A for a business A
-and the p A is of type business profit
-and an enterprise B receives a p B for an business B
+and the permanent establishment receives the profit A for a business A
+and the profit A is of type business profit
+and an enterprise B receives a profit B for an business B
 and the enterprise B is resident in the state S
-and the p A is similar to the p B
+and the profit A is similar to the profit B
 and the business A is similar to the business B
 and convention applies to the state R and the state S.
     
-exception to Article7_1 applies to an enterprise for a p
+exception to Article7_1 applies to an enterprise for a profit
 if the enterprise has a permanent establishment in a state
-and the p of the permanent establishment is taxable in the state under Article7_2.
+and the profit of the permanent establishment is taxable in the state under Article7_2.
 
 scenario one is:
 piera receives wage1 for employment1.

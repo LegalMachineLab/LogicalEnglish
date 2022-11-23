@@ -825,7 +825,7 @@ it_is_the_case_that_ --> [è], spaces(_), [provato], spaces(_), [che], spaces(_)
 is_a_set_of_ --> [is], spaces(_), [a], spaces(_), [set], spaces(_), [of], spaces(_). 
 is_a_set_of_ --> [es], spaces(_), [un],  spaces(_), [conjunto],  spaces(_), [de], spaces(_). % spanish
 is_a_set_of_ --> [est], spaces(_), [un],  spaces(_), [ensemble],  spaces(_), [de],  spaces(_). % french
-is_a_set_of_ --> [est], spaces(_), [un],  spaces(_), [ensemble],  spaces(_), [de],  spaces(_). % italian
+is_a_set_of_ --> [è], spaces(_), [un],  spaces(_), [insieme],  spaces(_), [di],  spaces(_). % italian
 
 where_ --> [where], spaces(_). 
 where_ --> [en], spaces(_), [donde], spaces(_). % spanish
