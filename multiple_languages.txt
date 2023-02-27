@@ -1,5 +1,7 @@
+the templates are.
 eng: *a person* is an italian citizen,
 ita: *una persona* è cittadina italiana.
-
 eng: *a person* is the father of *a person*,
 ita: il padre di *una persona* è *una persona*.
+
+the knowledge base contains.
