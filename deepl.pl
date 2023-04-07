@@ -4,7 +4,7 @@
 :- use_module(library(http/json)).
 
 % Define your DeepL API authentication key
-auth_key(Key):
+auth_key(Key):-
   open('deepl_authkey', read, Str),
   read_string(Str, _, Key),
   close(Str).

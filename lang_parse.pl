@@ -4,8 +4,10 @@
 :- dynamic local_dict/4.
 
 :- use_module('./le_input.pl').%, [build_template, unpack_tokens]).
-:- use_module('./deepl.pl', [translate]).
+:- use_module('./deepl.pl').
 
+
+% Set named variables
 get_variables_inner([punct(*)|_], Var2, Var2) :- !.
 
 get_variables_inner([A|List], Var, Var2) :-
@@ -20,6 +22,14 @@ get_variables([punct(*), A|Rest], Var, Var3) :-
 
 get_variables([_|Rest], _, Var) :-
     get_variables(Rest, _, Var).
+
+sublist([], []).
+sublist([H|Tail], [Res|RT]) :-
+    sublist(Tail, [RH|RT]),
+    atom_concat(H, ' ', Temp),
+    atom_concat(Temp, RH, Res).
+sublist([H|Tail], [H|R]) :-
+    sublist(Tail, R).
 
 lang_token(String_, Lang, NewTokens) :-
     % From input.pl
@@ -39,16 +49,32 @@ find_language(String, Lang, StringNew) :-
     member(inner_dict(Lang, StringNew, _, _), M),
     !.
 
-find_prolog(String_, Lang, Prolog, Args, NewTokens) :-
-    %lang_token(String_, Lang, String),
+find_prolog(String_, Lang, Prolog, Args, _) :-
     tokenize(String_, Tokens_, [cased(true), spaces(false), numbers(false)]),
-    le_input:unpack_tokens(Tokens_, NewTokens),
-    le_input:build_template(NewTokens, A, Args, Types, String),
+    le_input:unpack_tokens(Tokens_, Tokens2),
+    sublist(Tokens2, Tokens),
     local_dict(M),
-    member(inner_dict(_, String, _, _), M),
-    member(inner_dict(Lang, _, _, [Prolog_|Args]), M),
-    Prolog =..[Prolog_|Args], !.
-    %write_term(current_output, Prolog, [singletons(true)]).
+    member(inner_dict(_, Tokens, _, [_|Args]), M),
+    member(inner_dict(Lang, _, _, [P|_]), M),
+    Prolog=..[P|Args], !.
+
+match_template(PossibleLiteral, Map1, MapN, Literal) :- 
+    %print_message(informational,'Possible Literal ~w'-[PossibleLiteral]),
+    local_dict(M),
+    member(inner_dict(Lang, Tokens, _, Candidate), M),
+    le_input:match(Tokens, PossibleLiteral, Map1, MapN, Template), !,
+    Literal =.. Tokens.
+
+% find_prolog(String_, Lang, Prolog, Args, NewTokens) :-
+%     %lang_token(String_, Lang, String),
+%     tokenize(String_, Tokens_, [cased(true), spaces(false), numbers(false)]),
+%     le_input:unpack_tokens(Tokens_, NewTokens),
+%     le_input:build_template(NewTokens, _, Args, _, String),
+%     local_dict(M),
+%     member(inner_dict(_, String, _, _), M),
+%     member(inner_dict(Lang, _, _, [Prolog_|Args]), M),
+%     Prolog =..[Prolog_|Args], !.
+%     %write_term(current_output, Prolog, [singletons(true)]).
 
 find_prolog(String_, Lang, Prolog, Args, NewTokens) :-
     %lang_token(String_, Lang, String),
@@ -78,7 +104,7 @@ make_dict([Pred|GroupList], NewList) :-
     % assert(string_to_translate(1, PredClean))
     lang_token(PredClean, word(Lang), Tokens),
     % untokenize(Tokens, NewString),
-    split_string(PredClean, ":", " ", [_, NewString]),
+    % split_string(PredClean, ":", " ", [_, NewString]),
     % member(inner_dict(Lang, NewString, Tokens), NewList),
     le_input:build_template(Tokens, A, Args, Types, D),
     Predicate = [A|Args],
